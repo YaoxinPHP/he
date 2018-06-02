@@ -1,0 +1,61 @@
+{layout name="common/layout" /}
+<div class="aptitude">
+	<div class="wrap">
+		<div class="aptitude-item">
+			<div class="picScroll-left">
+				<div class="hd">
+					<a class="next"></a>
+					<a class="prev"></a>
+				</div>
+				<div class="bd">
+					<ul class="picList">
+						{foreach name="data" key="k" item="v" }
+						<li {if condition="$k eq 0"}class="active"{/if}>
+							<div class="pic">
+								<a href="javascript:;" target="_blank" onclick="showIntro(this,{$k+1})">
+									<img src="{$v['image']}" alt="" />
+								</a>
+							</div>
+							<div class="mt5">
+								<a href="javascript:;" onclick="showIntro(this,{$k+1})">{$v[title]}</a>
+							</div>
+						</li>
+						{/foreach}
+					</ul>
+				</div>
+			</div>
+
+			<script type="text/javascript">
+				jQuery(".picScroll-left").slide({
+					titCell: ".hd ul",
+					mainCell: ".bd ul",
+					autoPage: true,
+					effect: "left",
+					vis: 4
+				});
+			</script>
+			<div class="tab-con-aptitude" id="introParent">
+			{foreach name="data" key="k" item="v" }
+				<div class="aptitude-content" {if condition="$k eq 0"}style="display: block;"{/if}>
+					<div class="show-img">
+						<img src="{$v.image}" alt="" />
+					</div>
+					<h1 style="text-align: center;font-size: 24px;">{$v[title]}</h1>
+					{$v[content]}
+				</div>
+			{/foreach}
+			</div>
+			<!--切换-->
+			<script type="text/javascript">
+				function showIntro(thisObjParent, num) {
+					$(thisObjParent).parent().parent().addClass("active");
+					$(thisObjParent).parent().parent().siblings().removeClass("active");
+					$("#introParent>.aptitude-content").eq(num - 1).show();
+					$("#introParent>.aptitude-content").eq(num - 1).siblings().hide();
+				}
+			</script>
+			<!--切换 end-->
+		</div>
+
+	</div>
+</div>

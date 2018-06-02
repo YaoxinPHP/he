@@ -1,0 +1,76 @@
+{layout name="common/layout" /}
+<div class="sloct wrap">
+
+    <dl class="mesl"><!-- <dt> </dt> -->
+        {$data.content}    
+    </dl>
+    <div class="btmls tc mt70" style="text-align: center;">
+        <img src="{$data.image}" title="ter.jpg" /><br/><strong>{$data.title}</strong></div>
+    {if condition="$data.extends"}
+    <div class="picScroll-left">
+        <div class="hd">
+            <a class="next"></a>
+            <a class="prev"></a>
+        </div>
+        <div class="bd">
+            <ul class="picList">
+                {foreach name="data.extends" key="k" item="v" }
+                <li onclick="showIntro(this,{$k})">
+                    <div class="pic">
+                        <a href="javascript:;" target="_blank"><img src="{$v[image]}" /></a>
+                    </div>
+                    <div class="title">
+                        <a href="javascript:;" target="_blank">
+                            <b>{$v[title]}</b>
+                            <br />
+                        </a>
+                    </div>
+                </li>
+                {/foreach}
+            </ul>
+        </div>
+    </div>
+    {/if}
+    <div class="picScroll-con" id="introParent">
+        {foreach name="data.extends" key="k" item="v" }
+        <div class="item" {if condition="$k eq 1"}style="display: block;"{/if}>
+            {$v[content]}
+            <!-- <div>
+                <h2>有机黑豆</h2>
+                <p>一天内锁住真营养</p>
+            </div>
+            <div>
+                <p>
+                    山药是广受全国各地男女老幼欢迎的食物，人们常说脾胃虚弱，多吃山药。山药看着很土，实际上是非常娇嫩的作物，轻轻刮一下，皮就破了，一旦破皮，就容易变黄、发霉，影响品质。五谷磨房在山药产区建立了工厂，当天挖出来的山药必须马上送到工厂，从新鲜山药到制成干片，不超过24小时，用速度锁住山药的新鲜和营养。
+                </p>
+
+                <p style="text-align: center;">
+                    <img src="images/slide-goods-con-1.png" alt="" />
+                </p>
+            </div> -->
+        </div>
+        {/foreach}
+    </div>
+    <div class="plaskt" style="border:none;">
+        {$data.description}
+    </div>
+    <script type="text/javascript">
+        function showIntro(thisObj,num) {
+            $(thisObj).addClass("active");
+            $(thisObj).siblings().removeClass("active");
+            $("#introParent>div").eq(num - 1).show();
+            $("#introParent>div").eq(num - 1).siblings().hide();
+        }
+    </script>
+</div>
+
+<script type="text/javascript">
+    jQuery(".picScroll-left").slide({
+        titCell: ".hd ul",
+        mainCell: ".bd ul",
+        autoPage: true,
+        effect: "left",
+        autoPlay: true,
+        vis: 4
+    });
+</script>

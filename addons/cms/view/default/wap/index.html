@@ -1,0 +1,27 @@
+{layout name="common/wap_layout" /}
+<div class="ind-main">
+    <div class="swiper-container">
+        <ul class="swiper-wrapper">
+            {foreach $banner as $v}
+            <li class="ind-li swiper-slide">
+                <a style="background-image:url({$v['image']});" href="{$v['url']}"></a>
+            </li>
+            {/foreach}
+        </ul>
+    </div>
+    <div class="ind-pull">
+        <p>上滑查看更多</p>
+        <i></i>
+    </div>
+</div>
+<script>
+    $(function() {
+        var swiper = new Swiper('.swiper-container', {
+            pagination: '.swiper-pagination',
+            direction: 'vertical',
+            slidesPerView: 1,
+            loop: false,
+            spaceBetween: 0,
+        });
+    })
+</script>

@@ -1,0 +1,138 @@
+{layout name="common/layout" /}
+<div class="join">
+	<div class="wrap">
+		<div class="join-item">
+			<div class="join-item-h tc">
+				<div>
+					<img src="images/logos.png" alt="" width="82" />
+				</div>
+				<h1>禾邦加盟预约单</h1>
+			</div>
+			<div class="join-item-b">
+				<form action="">
+					<div class="input-box">
+						<div class="input-cell inline">
+							<div class="w-1">
+								<label for="input1" class="controll-label">
+									<span>
+										<img src="images/user.png" alt="" width="22" height="22"/>
+									</span>
+									<span>
+										姓名
+									</span>
+								</label>
+							</div>
+							<div class="w-9">
+								<input id="input1" type="text" name="name" class="input-controll"/>
+							</div>
+						</div>
+						
+						<div class="input-cell inline">
+							<div class="w-1">
+								<label for="input2" class="controll-label">
+									<span>
+										<img src="images/phon.png" alt="" width="22" height="22"/>
+									</span>
+									<span>
+										电话
+									</span>
+								</label>
+							</div>
+							<div class="w-9">
+								<input id="input2" type="text" name="mobile" class="input-controll"/>
+							</div>
+						</div>
+						
+						<div class="input-cell inline">
+							<div class="w-1">
+								<label for="input3" class="controll-label">
+									<span>
+										<img src="images/addres.png" alt="" width="22" height="22"/>
+									</span>
+									<span>
+										地址
+									</span>
+								</label>
+							</div>
+							<div class="w-9">
+								<input id="input3" type="text" name="address" class="input-controll"/>
+							</div>
+						</div>
+						
+						<div class="input-cell">
+							<div class="">
+								<label for="input4" class="controll-label">
+									<span>
+										<img src="images/sun.png" alt="" width="22" height="22"/>
+									</span>
+									<span>
+										实力说明
+									</span>
+								</label>
+							</div>
+							<div class="">
+								<textarea id="input4" class="input-controll" name="description" rows="" cols=""></textarea>
+							</div>
+						</div>
+						
+						
+						<div class="input-cell">
+							<div class="">
+								<label for="input5" class="controll-label">
+									<span>
+										<img src="images/message.png" alt="" width="22" height="22"/>
+									</span>
+									<span>
+										加盟留言
+									</span>
+								</label>
+							</div>
+							<div class="">
+								<textarea id="input5" class="input-controll" name="message" rows="" cols=""></textarea>
+							</div>
+						</div>
+						
+					</div>
+					<div class="tc">
+						<button id="formsbumit" type="button" class="join-submit">提交</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<a href="http://wpa.qq.com/msgrd?v=3&uin={:$site['qq']}&site=qq&menu=yes" class="contactUs-fixed" >
+	在线咨询
+</a>
+<script type="text/javascript">
+	$('#formsbumit').click(function(){
+		var data = {},flag = true;
+		$("form").find('input,textarea').each(function(){
+			var name = $(this).attr('name');
+			var value = $(this).val();
+			if(name=='name'||name=='mobile'){
+				if(!value){
+					alert('请填入姓名 电话');
+					flag = false;
+					return false;
+				}
+			}
+			data[name] = value;
+		})
+		if(!flag) return false;
+		$.ajax({
+			url:'/api/index/addJoin',
+			data:data,
+			type:'post',
+			success:function(obj){
+				if(obj.code == 1){
+					alert('提交成功');
+				}else{
+					alert('提交失败');	
+				}
+			}
+		})
+	});
+</script>

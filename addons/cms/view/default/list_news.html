@@ -1,0 +1,89 @@
+{layout name="common/layout" /}
+
+<div class="sloct wrap">
+
+    <div class="sloct w800">
+        <div class="btmls tc">
+            <img src="{$data.image}" alt="" width="50" height="50" />
+            <div class="mt10">
+                {$data.content}
+            </div>
+        </div>
+        <!-- <div class="mt30 tc tm-intro">
+            成都中医大、四川农业大学联合研发100多次试验，细胞级深入研究，分析不<br /> 同食材的营养价值。锁住食材全部营养，评估食材适宜的加工温度、加工工艺。60多次反复
+            <br /> 调配，只为中国人体质，搭配可靠的食养方。
+        </div> -->
+    </div>
+
+    <div class="intro-video">
+
+        <img src="{$data.background}" alt="" />
+        <a href="javascript:;" class="video-li-a">
+
+        </a>
+        <!--video-->
+        <div class="big-video">
+            <div class="big-video-main">
+                <video id="my-video" class="video-js" controls preload="auto" width="800" height="500" poster="__ADDON__/static/images/video.jpg" data-setup="{}">
+                    <source src="{$data.video}" type="video/mp4">
+                    <p class="vjs-no-js">
+                        To view this video please enable JavaScript, and consider upgrading to a web browser that
+                        <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+                    </p>
+                </video>
+            </div>
+            <div class="big-video-clo">
+                <!--close-->
+            </div>
+        </div>
+        <!--video end-->
+
+    </div>
+    <div class="btmls tc mt70" style="text-align: center;">
+    <div class="plaskt" style="border:none;">
+        {$data.description}
+    </div>
+    <script type="text/javascript">
+        function showIntro(thisObj,num) {
+            $(thisObj).addClass("active");
+            $(thisObj).siblings().removeClass("active");
+            $("#introParent>div").eq(num - 1).show();
+            $("#introParent>div").eq(num - 1).siblings().hide();
+        }
+    </script>
+</div>
+</div>
+<script type="text/javascript" src="__ADDON__/static/js/video.min.js"></script>
+<script>
+    jQuery(".prest").slide({
+        titCell: ".dot",
+        mainCell: ".gz-ys",
+        effect: "left",
+        autoPlay: true,
+        delayTime: 700,
+        autoPage: true
+    });
+</script>
+
+<!--播放视频-->
+<script type="text/javascript">
+    $(function() {
+        //video初始化
+        var myPlayer = videojs('my-video');
+        videojs("my-video").ready(function() {
+            var myPlayer = this;
+        });
+        //打开
+        $(".video-li-a").on("click", function() {
+            $(".big-video").css("display", "block");
+            myPlayer.play(); //开始播放
+        })
+
+        //关闭
+        $(".big-video-clo").on("click", function() {
+            $(".big-video").css("display", "none");
+            myPlayer.pause(); //暂停
+        })
+
+    })
+</script>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+
+<html lang="zh">
+
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no" />
+		<meta name="apple-touch-fullscreen" content="YES" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<title>禾邦</title>
+		<meta name="keywords" content="禾邦" />
+		<meta name="description" content="禾邦" />
+		<link rel="stylesheet" type="text/css" href="__ADDON__/static/wap/css/screen.css" />
+		<script src="__ADDON__/static/wap/js/zepto.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__ADDON__/static/wap/js/fastclick.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__ADDON__/static/wap/js/common.js" type="text/javascript" charset="utf-8"></script>
+		<script src="__ADDON__/static/wap/js/common_2.js" type="text/javascript"></script>
+		<link rel="stylesheet" type="text/css" href="__ADDON__/static/wap/css/swiper.min.css" />
+		<script src="__ADDON__/static/wap/js/swiper.jquery.min.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+
+	<body>
+		<header class="head">
+			<div class="head-btn">
+				<i></i>
+			</div>
+			<div class="head-main">
+				<div class="head-logo">
+					<a href="/cms">
+						<img src="__ADDON__/static/wap/images/logo.png" alt="" width="30" height="30"/>
+					</a>
+				</div>
+				<input class="head-ser" type="text" name="" id="" value="" placeholder="请输入关键字" />
+				<div class="head-com">
+					<a class="head-com-a" href="" target="_blank"></a>
+				</div>
+			</div>
+			<nav class="head-nav">
+				{cms:nav flag="ok" where="parent_id = 0" flag="$__FLAG__" /}
+			</nav>
+		</header>
+
+		{__CONTENT__}
+		
+		{if condition="$flagId"}
+		<footer class="foot">
+			<nav class="foot-nav">
+				{cms:nav flag="ok" where="parent_id = 0" flag="$__FLAG__" /}
+			</nav>
+			<p>{:$site['address']} {:$site['beian']}</p>
+		</footer>
+        {/if}
+
+	</body>
+
+</html>

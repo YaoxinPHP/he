@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+
+    <!-- Mirrored from www.szwgmf.com/products.aspx?cateid=36 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 May 2018 02:41:28 GMT -->
+    <!-- Added by HTTrack -->
+    <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+    <!-- /Added by HTTrack -->
+
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{cms:config name="cms.title"/} - {cms:config name="cms.sitename"/}</title>
+        <meta name="keywords" content="{cms:config name='cms.keywords'/}" />
+        <meta name="description" content="{cms:config name='cms.description'/}" />
+        <link href="__ADDON__/static/css/css.css" type="text/css" rel="stylesheet">
+        <link href="__ADDON__/static/css/main.css" type="text/css" rel="stylesheet">
+        <script type="text/javascript" src="__ADDON__/static/js/jquery-1.8.3.min.js"></script>
+        <script type="text/javascript" src="__ADDON__/static/js/selfjs.js"></script>
+        <script src="__ADDON__/static/sysaspx/common.js" type="text/javascript"></script>
+    </head>
+
+    <body>
+
+        <div class="top">
+            <div class="conter">
+                <div class="menu">
+                    <div class="clist"></div>
+                    <ul class="navs-t" style="display: none;">
+                        <p class="ded"></p>
+                        {cms:nav maxlevel="1" cache="0" /}
+                    </ul>
+                </div>
+                <div class="ml35 fl lidet">
+                    <img src="__ADDON__/static/images/wbl.png" />
+                </div>
+                <div class="logo abs">
+                    <a href="/cms">
+                        <img src="__ADDON__/static/images/logo.png" width="62" height="62" /></a>
+                </div>
+                <div class="gwcs">
+                    <a href="https://s.click.taobao.com/I2Qk1Uw" target="_blank">购物车</a>
+                </div>
+
+            </div>
+        </div>
+        <script src="__ADDON__/static/js/jquery.superslide.2.1.1.js" type="text/javascript"></script>
+        <div id="go-top"></div>
+        <div class="prest">
+            <ul class="gz-ys">
+                {foreach $banner as $v}
+                <li>
+                    <a href="{$v['url']}" style="background-image:url({$v['image']})"></a>
+                </li>
+                {/foreach}
+            </ul>
+            <ul class="dot"></ul>
+        </div>
+        <script>
+            jQuery(".prest").slide({
+                titCell: ".dot",
+                mainCell: ".gz-ys",
+                effect: "left",
+                autoPlay: true,
+                delayTime: 700,
+                autoPage: true
+            });
+        </script>
+        {if condition="$flagId"}
+        <div class="nobost">
+            <div class="wrap tc">
+               {cms:nav flag="ok" where="parent_id = $flagId" flag="$__FLAG__" /}
+               <!--  <a id="" href="">天然粉粉</a>
+                <a id="" class="cur" href="">有机食品</a>
+                <a id="" href="">固体饮料</a>
+                <a id="" href="">代用茶</a>
+                <a id="" href="">粉粉搭档</a>
+                <a id="" href="">提神含片</a> -->
+            </div>
+        </div>
+        {/if}
+        <script>
+            var cateid = "3";
+            $("#d_nav" + cateid).addClass("cur");
+        </script>
+
+        {__CONTENT__}
+        <div class="foot tc">
+             {cms:nav flag="ok" where="parent_id = 0" flag="$__FLAG__" /}|&nbsp;{:$site['mobile']}
+            <br />{:$site['address']}
+            <a href="http://www.miitbeian.gov.cn/" target="_blank">{:$site['beian']}</a>
+        </div>
+
+    </body>
+
+    <!-- Mirrored from www.szwgmf.com/products.aspx?cateid=36 by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 May 2018 02:41:46 GMT -->
+</html>

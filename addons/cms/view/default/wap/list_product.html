@@ -1,0 +1,51 @@
+{layout name="common/wap_layout" /}
+<div class="main">
+	{include file="common/wap_banner_layout" /}		
+		<div class="main-content">
+			{$data.content}
+		</div>
+		<div class="food">
+			<div class="swiper-container swiper-container2">
+				<ul class="swiper-wrapper">
+					{if condition="$data.extends"}
+					{foreach name="data.extends" key="k" item="v" }
+					<li class="food-li swiper-slide">
+						<div class="food-li-img">
+							<img src="{$v[image]}" alt="" />
+						</div>
+						<div class="food-li-tit">
+							<p>{$v[title]}</p>
+							<!-- <span>鄱阳湖畔的夏日香</span> -->
+						</div>
+						<div class="food-li-intro">
+							{$v[content]}
+						</div>
+					</li>
+                	{/foreach}
+    				{/if}
+				</ul>
+				<!-- 如果需要导航按钮 -->
+				<div class="swiper-button-prev"></div>
+				<div class="swiper-button-next"></div>
+			</div>
+		</div>	
+		<div class="main-content">
+			{$data.description}
+		</div>
+</div>
+
+<script>
+	$(function() {
+		var swiper = new Swiper('.swiper-container2', {
+			pagination: '.swiper-pagination',
+			direction: 'horizontal',
+			slidesPerView: 1,
+			loop: false,
+			spaceBetween: 0,
+			navigation: {
+				nextEl: '.swiper-button-next',
+				prevEl: '.swiper-button-prev',
+			},
+		});
+	})
+</script>

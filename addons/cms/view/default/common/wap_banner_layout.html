@@ -1,0 +1,45 @@
+<div class="banner">
+	<div class="swiper-container">
+		<ul class="swiper-wrapper">
+        	{foreach $banner as $v}
+			<li class="banner-li swiper-slide">
+				<a href="{$v['url']}">
+					<img src="{$v['image']}" alt="{$v['title']}" />
+				</a>
+			</li>
+        	{/foreach}
+
+		</ul>
+		<!-- 如果需要分页器 -->
+		<div class="swiper-pagination"></div>
+	</div>	
+	<!-- <h1 class="title">有机食品</h1> -->
+	<nav class="ban-nav">
+		<div class="ban-nav-tit">{$__CHANNEL__['name']}</div>
+		<div class="ban-nav-a">
+			{cms:nav flag="ok" where="parent_id = $flagId" flag="$__FLAG__" /}
+		</div>
+	</nav>
+</div>
+<script>
+	$(function() {
+
+		var mySwiper = new Swiper('.banner-play', {
+			loop: true,
+			// 如果需要分页器
+			pagination: '.swiper-pagination',
+			autoplay: 3000
+		})
+	})
+</script>
+<script>
+	$(function() {
+
+		var mySwiper = new Swiper('.swiper-container', {
+			loop: true,
+			// 如果需要分页器
+			pagination: '.swiper-pagination',
+			autoplay: 3000
+		})
+	})
+</script>

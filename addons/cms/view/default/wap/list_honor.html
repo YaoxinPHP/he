@@ -1,0 +1,52 @@
+{layout name="common/wap_layout" /}
+<div class="main">
+	{include file="common/wap_banner_layout" /}		
+	<div class="aptitude-item">
+				<div class="swiper-container swiper-container-img">
+					<ul class="swiper-wrapper">
+						{foreach name="data" key="k" item="v" }
+						<li class="swiper-slide">
+							<div class="aptitude-head">
+								<div class="tm-location-parent">
+									<div class="tm-location-img" style="background-image: url({$v['image']});"></div>
+									<img class="redundant-img" src="images/5X3.png" alt="" width="100" />
+								</div>
+							</div>
+							
+							<div class="aptitude-body">
+								<div class="aptitude-title">
+									{$v[title]}
+								</div>
+								<div>
+									{$v[content]}
+								</div>
+							</div>
+						</li>		
+						{/foreach}				
+					</ul>
+					<!-- 如果需要导航按钮 -->
+					<div class="swiper-button-prev"></div>
+					<div class="swiper-button-next"></div>
+				</div>
+	</div>
+
+	<!--slide nav-->
+	<script>
+		$(function() {
+			var swiper1 = new Swiper('.swiper-container-img', {
+				pagination: '.swiper-pagination',
+				direction: 'horizontal',
+				slidesPerView: 1,
+				loop: false,
+				spaceBetween: 0,
+				navigation: {
+					nextEl: '.swiper-button-next',
+					prevEl: '.swiper-button-prev',
+				},
+			});
+
+
+		})
+	</script>
+
+</div>

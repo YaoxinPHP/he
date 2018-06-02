@@ -1,0 +1,154 @@
+{layout name="common/layout" /}
+		<div class="join history">
+			<div class="sloct wrap">
+				<div class="picScroll-left">
+					<div class="hd">
+						<a class="next"></a>
+						<a class="prev"></a>
+					</div>
+					<div class="bd">
+						<ul class="picList">
+							{foreach name="data.years" key="k" item="v"}
+							<li {if condition="$k eq 0"}class="active"{else/}class="pic"{/if}>
+								<div class="pic">
+									<a href="javascript:;" target="_blank" onclick="showIntro(this,{$k+1})">{$v['years']}</a>
+								</div>
+								<span class="hr"></span>
+							</li>
+							{/foreach}
+						</ul>
+					</div>
+				</div>
+
+				<script type="text/javascript">
+					jQuery(".picScroll-left").slide({
+						titCell: ".hd ul",
+						mainCell: ".bd ul",
+						autoPage: true,
+						effect: "left",
+						vis: 5
+					});
+				</script>
+
+				<div class="tab-con" id="introParent">
+
+					<!--item1-->
+					{foreach name="data.content" key="k" item="v"}
+					<div class="history-content" {if condition="$k eq 0"}style="display: block;"{/if}>
+						<div class="history-title-timer">
+							<div class="timer">
+								<span>{:date('Y',$v[0][publishtime])}年</span>
+								<i></i>
+							</div>
+						</div>
+
+						<!--cell-->
+						{foreach name="v" key="kk" item="vv"}
+						<div class="history-cell">
+							<div class="timer">
+								{:date('m',$vv[publishtime])}月
+							</div>
+							<a href="javascript:;" class="clerfix" onclick="" ids='{$vv[id]}'>
+								<div class="img-con">
+									<img src="{$vv[image]}" />
+								</div>
+								<div class="intro-con">
+									<div class="intro-t">
+										{$vv[title]}
+									</div>
+									<div class="intro-b ellipsis">
+										{$vv[description]}
+									</div>
+								</div>
+							</a>
+						</div>
+						{/foreach}
+
+					</div>
+					{/foreach}
+					<!--item1 end-->
+				</div>
+
+				<!--时间轴切换-->
+				<script type="text/javascript">
+					function showIntro(thisObjParent, num) {
+						$(thisObjParent).parent().parent().addClass("active");
+						$(thisObjParent).parent().parent().siblings().removeClass("active");
+						$("#introParent>.history-content").eq(num - 1).show();
+						$("#introParent>.history-content").eq(num - 1).siblings().hide();
+					}
+				</script>
+				<!--时间轴切换 end-->
+
+			</div>
+		</div>
+
+		<!--发展历程详情弹窗-->
+		<div class="news_details_layer">
+			<div class="layer-con">
+
+				<a href="javascript:;" class="close-layer">
+
+				</a>
+
+				<div class="scroll" id="info_layers">
+					<div class="news-head">
+						<h1 class="news-title"></h1>
+						<div class="title-intro">
+						</div>
+					</div>
+
+					<div class="news-body">
+					</div>
+				</div>
+			</div>
+
+			<div class="layer-mask">
+
+			</div>
+		</div>
+		<!--发展历程详情弹窗 end-->
+
+		<!--弹窗展示-->
+		<script type="text/javascript">
+			$(function() {
+				$(".history-content .history-cell a.clerfix").on("click", function() {
+					if($(".news_details_layer").hasClass("active")) {
+						$(".news_details_layer").fadeOut(500);
+						$(".news_details_layer").removeClass("active");
+					} else {
+						$(".news_details_layer").fadeIn(500);
+						$(".news_details_layer").addClass("active");
+						var data = {'id':$(this).attr('ids')}
+						$.ajax({
+							url:'/api/index/getgetDevelopInfo',
+							data:data,
+							success:function(obj){
+								if(obj.data){
+									$('#info_layers .news-title').text(obj.data['title']);
+									$('#info_layers .title-intro').text('发布时间：'+obj.data['datetime']);
+									$('#info_layers .news-body').html(obj.data['content']);
+								}
+							}
+						})
+					}
+				})
+
+				$('.news_details_layer .layer-mask').on('click', function() {
+					$(".news_details_layer").fadeOut(500);
+					$(".news_details_layer").removeClass("active");
+				})
+
+				$('.news_details_layer .close-layer').on('click', function() {
+					$(".news_details_layer").fadeOut(500);
+					$(".news_details_layer").removeClass("active");
+				})
+
+			})
+		</script>
+
+	</body>
+
+	<!-- Mirrored from www.szwgmf.com/contact.aspx by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 21 May 2018 02:46:41 GMT -->
+
+</html>

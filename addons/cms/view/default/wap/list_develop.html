@@ -1,0 +1,133 @@
+{layout name="common/wap_layout" /}
+<div class="main">
+	{include file="common/wap_banner_layout" /}		
+	<div>
+		<div class="swiper-container swiper-tab-nav">
+			<div class="swiper-wrapper" data-uk-switcher="{connect:'#history-tab-con',swiping:false}">
+				{foreach name="data.years" key="k" item="v"}
+				<a href="" class="swiper-slide uk-active">
+					<div href="javascript:;" class="tm-cell tm-tab-item">
+						<div class="tm-icon-item">
+							<div class="tm-icon-label">
+								{$v['years']}
+							</div>
+						</div>
+					</div>
+				</a>
+				{/foreach}
+			</div>
+		</div>
+
+		<div class="uk-switcher main-content" id="history-tab-con">
+			{foreach name="data.content" key="k" item="v"}
+			<div>
+				<div class="history-group">
+					<div class="history-title">
+						{:date('Y',$v[0][publishtime])}年
+					</div>
+
+					<div class="history-body">
+						{foreach name="v" key="kk" item="vv"}
+						<div class="history-cell">
+							<div class="tm-date">
+								{:date('m',$vv[publishtime])}月
+							</div>
+							<div class="">
+								<a href="javascript:;" ids='{$vv[id]}' class="tm-flex flex-align-center trigger-molad">
+									<div class="tm-flex-head">
+										<div class="tm-atav">
+											<div class="tm-location-parent">
+												<div class="tm-location-img" style="background-image: url({$vv[image]});"></div>
+												<img class="redundant-img" src="images/3X2.png" alt="" width="100" />
+											</div>
+										</div>
+									</div>
+									<div class="tm-flex-1">
+										<div class="tm-flex-row-xs">
+											<div class="tm-title tm-ellipsis">
+												{$vv[title]}
+											</div>
+										</div>
+										<div class="tm-flex-row-xs">
+											<div class="tm-intro tm-ellipsis-2">
+												{$vv[description]}
+											</div>
+										</div>
+									</div>
+								</a>
+							</div>
+						</div>
+						{/foreach}
+					</div>
+				</div>
+			</div>
+			{/foreach}
+			
+		</div>
+
+	</div>
+	<!--slide nav-->
+	<script type="text/javascript">
+		var swiper2 = new Swiper('.swiper-tab-nav', {
+			slidesPerView: 5,
+		});
+	</script>
+</div>
+<!--modal-->
+<div id="modal-blank" class="uk-modal tm-modal">
+	<div class="uk-modal-dialog uk-modal-dialog-blank">
+		<button class="uk-modal-close uk-close" type="button">
+			关闭
+		</button>
+		<div class="tm-scroll" id="info_layers">
+			<div class="news-details">
+				<div class="news-head">
+					<h1 class="news-title">上海股权托管交易中心创客正式开版</h1>
+					<p class="news-date">发布时间：2018年5月29日</p>
+				</div>
+				<div class="news-body">
+					<p style="text-align: center;margin: 10px 0;"><img src="images/news.jpg" alt=""></p>
+					<p>&emsp;&emsp;总之，有个国家承认的本科学历在当今社会无疑很重要，平时看似没有用，当需要学历时，再去着手，不仅需要花更多的时间和金钱，重要的是人生的机遇也丧失许多了，所以建议各位在职人员</p>
+					<br />
+					<br />
+					<p>&emsp;&emsp;总之，有个国家承认的本科学历在当今社会无疑很重要，平时看似没有用，当需要学历时，再去着手，不仅需要花更多的时间和金钱，重要的是人生的机遇也丧失许多了，所以建议各位在职人员</p>
+					<br />
+					<br />
+					<p>&emsp;&emsp;总之，有个国家承认的本科学历在当今社会无疑很重要，平时看似没有用，当需要学历时，再去着手，不仅需要花更多的时间和金钱，重要的是人生的机遇也丧失许多了，所以建议各位在职人员</p>
+					<br />
+					<br />
+					<p>&emsp;&emsp;总之，有个国家承认的本科学历在当今社会无疑很重要，平时看似没有用，当需要学历时，再去着手，不仅需要花更多的时间和金钱，重要的是人生的机遇也丧失许多了，所以建议各位在职人员</p>
+				
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="__ADDON__/static/wap/js/jquery.min.js"></script>
+<script type="text/javascript" src="__ADDON__/static/wap/js/uikit.min.js"></script>
+
+<script type="text/javascript">
+	
+	
+	var modal = UIkit.modal(".uk-modal");
+
+	$(".trigger-molad").on("click", function() {
+		if(modal.isActive()) {
+			modal.hide();
+		} else {
+			modal.show();
+			var data = {'id':$(this).attr('ids')}
+			$.ajax({
+				url:'/api/index/getgetDevelopInfo',
+				data:data,
+				success:function(obj){
+					if(obj.data){
+						$('#info_layers .news-title').text(obj.data['title']);
+						$('#info_layers .news-date').text('发布时间：'+obj.data['datetime']);
+						$('#info_layers .news-body').html(obj.data['content']);
+					}
+				}
+			})
+		}
+	})
+</script>
